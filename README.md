@@ -1,6 +1,6 @@
 #  Design and Implementation of a Simple 8-bit Multi-Cycle CPU Using Verilog
 
-## 📌 Overview
+## Overview
 
 This project presents the **design and implementation of a simple 8-bit multi-cycle CPU** using **Verilog HDL**.
 The CPU is built with a strong emphasis on **clear separation between datapath and control logic**, making the design **modular, extensible, and easy to debug**.
@@ -94,7 +94,7 @@ Each instruction completes execution in **four clock cycles**.
 
 ---
 
-## 🔗 Datapath Components
+## Datapath Components
 
 ### Program Counter (PC)
 
@@ -314,7 +314,7 @@ This project provides a **strong foundation** for understanding:
 
 ---
 
-## 👤 Author
+## Author
 
 **Jami Shashank**
 
