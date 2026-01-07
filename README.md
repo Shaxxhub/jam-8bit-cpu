@@ -9,7 +9,7 @@ The processor supports **arithmetic, logical, memory, and control flow instructi
 
 ---
 
-## 🏗️ CPU Architecture Overview
+## CPU Architecture Overview
 
 The CPU follows a **Harvard architecture**, where instruction memory and data memory are separate.
 
@@ -27,9 +27,12 @@ The CPU follows a **Harvard architecture**, where instruction memory and data me
 
 Each instruction completes execution in **four clock cycles**.
 
+
+<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/ac52a92b-dc8c-411e-b3c7-01b0fb061c9c" />
+
 ---
 
-## 📘 Instruction Set Architecture (ISA)
+## Instruction Set Architecture (ISA)
 
 ### Instruction Format (8 bits)
 
@@ -145,7 +148,7 @@ Each instruction completes execution in **four clock cycles**.
 
 ---
 
-## 🕹️ Control Unit (FSM)
+## Control Unit (FSM)
 
 The CPU uses a **4-state Finite State Machine (FSM)** for control.
 
@@ -165,7 +168,7 @@ The CPU uses a **4-state Finite State Machine (FSM)** for control.
 
 ---
 
-## 🧩 CPU Top Module
+## CPU Top Module
 
 The top-level module integrates:
 
@@ -178,10 +181,89 @@ The top-level module integrates:
 * Data Memory
 
 The top module contains **no behavioral logic**—only **structural interconnections** forming the complete datapath.
+flowchart TD
+
+    PC --> IMEM[Instruction Memory]
+    IMEM --> IR[Instruction Register]
+    IR --> CU[Control Unit FSM]
+
+    IR --> RF[Register File]
+    RF -->|rs_data| ALU
+    RF -->|rt_data| ALU
+
+    ALU --> WB[Writeback MUX]
+    DMEM[Data Memory] --> WB
+    WB --> RF
+
+    RF -->|rs_data| DMEM
+    RF -->|rt_data| DMEM
+
+    CU --> PC
+    CU --> IR
+    CU --> RF
+    CU --> ALU
+    CU --> DMEM
+
+ 
+                +-------------------+
+                |   Control Unit    |
+                |   (FSM)           |
+                |-------------------|
+                | pc_en, pc_load    |
+                | ir_load           |
+                | reg_write         |
+                | mem_read/write    |
+                | alu_op            |
+                +---------+---------+
+                          |
+                          v 
+    +--------+      +-------------------+      +-------------------+
+    |  PC    |----->| Instruction Memory|----->| Instruction Reg   |
+    |        |      |      (ROM)        |      |      (IR)         |
+    +--------+      +-------------------+      +-------------------+
+       |                                          |
+       |                                          v
+       |                                    Opcode / rd / rs
+       |                                          |
+       v                                          v
+     +-----------------------------------------------------------+
+     |                     Register File                         |
+     |                 (8 Registers × 8-bit)                     |
+     |                                                           |
+     |   rs_data ------------------------+                       |
+     |                                   |                       |
+     |   rt_data --------------------+   |                       |
+     |                               |   |                       |
+     +-------------------------------|---|-----------------------+
+                                     v   v
+                                   +-----------+
+                                   |   ALU     |
+                                   | (ADD/SUB/ |
+                                   | AND/OR/   |
+                                   | XOR)      |
+                                   +-----------+
+                                         |
+                                         v
+                                  +----------------+
+                                  | Writeback MUX |
+                                  +----------------+
+                                         |
+                                         v
+                                  Register File
+     
+     +-------------------+
+     |   Data Memory     |
+     |     (RAM)         |
+     +-------------------+
+        ^           |
+        |           v
+      rs_data    rt_data
+     
+
 
 ---
 
-## 🧪 Verification Strategy
+## Verification Strategy
 
 A full **system-level testbench** was developed to verify the CPU.
 
@@ -201,9 +283,11 @@ A full **system-level testbench** was developed to verify the CPU.
 
 Waveform analysis confirms **correct multi-cycle execution** of all instructions.
 
+<img width="1090" height="547" alt="image" src="https://github.com/user-attachments/assets/f59236d2-ddc4-4a18-a683-0830fa927326" />
+
 ---
 
-## ✅ Conclusion
+## Conclusion
 
 The designed 8-bit CPU successfully demonstrates:
 
@@ -220,7 +304,7 @@ This project provides a **strong foundation** for understanding:
 
 ---
 
-## 🚀 Future Enhancements
+## Future Enhancements
 
 * Immediate-mode instructions
 * Pipelined execution
