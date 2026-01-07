@@ -317,11 +317,7 @@ This project provides a **strong foundation** for understanding:
 ## 👤 Author
 
 **Jami Shashank**
+
 Electronics and Communication Engineering
+
 VLSI / Digital Design Enthusiast
-
----
-
-
-
-Just tell me 👍
