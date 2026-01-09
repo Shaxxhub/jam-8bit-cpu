@@ -13,6 +13,8 @@ The processor supports **arithmetic, logical, memory, and control flow instructi
 
 The CPU follows a **Harvard architecture**, where instruction memory and data memory are separate.
 
+<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/ac52a92b-dc8c-411e-b3c7-01b0fb061c9c" />
+
 ### Key Characteristics
 
 * **Data width:** 8 bits
@@ -28,7 +30,6 @@ The CPU follows a **Harvard architecture**, where instruction memory and data me
 Each instruction completes execution in **four clock cycles**.
 
 
-<img width="800" height="400" alt="image" src="https://github.com/user-attachments/assets/ac52a92b-dc8c-411e-b3c7-01b0fb061c9c" />
 
 ---
 
